@@ -10,26 +10,51 @@
 	-webkit-hyphens: auto;
 }
 
-/* ---------- Homepage banner: longer bio text ---------- */
+/* ---------- Homepage banner: bio text in normal case ---------- */
 #banner.major { height: auto; min-height: 100vh; padding-top: 7em; padding-bottom: 5em; }
 #banner .content { display: block; }
 #banner .content .bio { max-width: 58em; }
-#banner .content .bio p { font-size: 1em; line-height: 1.75; margin: 0 0 1.25em 0; }
+#banner .content .bio p {
+	font-family: inherit;
+	font-size: 1.05em;
+	font-weight: 400;
+	line-height: 1.75;
+	letter-spacing: 0.01em;
+	text-transform: none !important;
+	margin: 0 0 1.25em 0;
+}
 #banner .content .bio p:last-child { margin-bottom: 0; }
 
 /* ---------- Project description ---------- */
 .project-meta { line-height: 1.9; margin-bottom: 2em; }
 .project-meta strong { letter-spacing: 0.05em; }
 
-/* ---------- Gallery: same-size photo cells, alternating left/right ---------- */
-/* Uses the template's own spotlight colors; the side opposite each photo stays empty. */
-.spotlights.gallery-spotlights > section { min-height: 30em; }
-.spotlights.gallery-spotlights > section > .image { cursor: zoom-in; border-bottom: none; }
+/* ---------- Gallery: same-height photos in rows, no empty space ---------- */
+#gallery { padding: 0 !important; margin: 0 !important; }
+.gallery-grid { display: flex; flex-wrap: wrap; }
+.gallery-grid .gallery-item {
+	flex: 1 1 33.333%;
+	height: 22em;
+	display: block;
+	overflow: hidden;
+	cursor: zoom-in;
+	border-bottom: none !important;
+}
+.gallery-grid.cols-4 .gallery-item { flex-basis: 25%; height: 20em; }
+.gallery-item img {
+	display: block; width: 100%; height: 100%;
+	object-fit: cover;
+	transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); opacity: 0.9; }
 
 @media screen and (max-width: 980px) {
-	.spotlights.gallery-spotlights > section { min-height: 0; }
-	.spotlights.gallery-spotlights > section > .image { height: 22em; }
-	.spotlights.gallery-spotlights > section > .content { display: none; }
+	.gallery-grid .gallery-item,
+	.gallery-grid.cols-4 .gallery-item { flex-basis: 50%; height: 18em; }
+}
+@media screen and (max-width: 480px) {
+	.gallery-grid .gallery-item,
+	.gallery-grid.cols-4 .gallery-item { flex-basis: 100%; height: 16em; }
 }
 
 /* ---------- Lightbox ---------- */
@@ -51,32 +76,16 @@
 .lightbox .lb-next { right: 0.2em; top: 50%; transform: translateY(-50%); }
 
 /* ---------- Black / white / gray palette ---------- */
-/* Page surfaces */
 body, #wrapper { background-color: #232323 !important; }
 #main, #main.alt { background-color: #232323 !important; }
 #main > section { background-color: #262626 !important; }
 #banner { background-color: #262626 !important; }
 .tiles article { background-color: #2a2a2a !important; }
 
-/* Gallery rows: alternating neutral grays */
-#main .spotlights > section:nth-child(odd)  { background-color: #2a2a2a !important; }
-#main .spotlights > section:nth-child(even) { background-color: #323232 !important; }
-.spotlights > section > .content { background-color: transparent !important; }
-
-/* Template color overlays on banners, tiles and photos -> gray */
+/* Template color overlays on banners and tiles -> gray */
 #banner:before, #banner:after,
 .tiles article:before, .tiles article:after,
-.tiles article > .image:before, .tiles article > .image:after,
-.spotlights > section > .image:before, .spotlights > section > .image:after { filter: grayscale(1); }
+.tiles article > .image:before, .tiles article > .image:after { filter: grayscale(1); }
 
-/* Parts that contain no photos -> fully gray (header, menu, contact, footer) */
+/* Parts that contain no photos -> fully gray */
 #header, #menu, #contact, #footer { filter: grayscale(1); }
-
-/* ---------- Gallery rows: force neutral gray (stronger overrides) ---------- */
-#gallery > section:nth-child(odd)  { background: #2a2a2a !important; }
-#gallery > section:nth-child(even) { background: #323232 !important; }
-#gallery > section > .content,
-#gallery > section > .content > .inner { background: transparent !important; }
-#gallery > section > .content { filter: grayscale(1); }
-#gallery > section > .content:before,
-#gallery > section > .content:after { display: none !important; }
