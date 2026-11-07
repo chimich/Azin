@@ -1,0 +1,73 @@
+/* Azin Kamangar portfolio - extra styles (load after main.css) */
+
+/* ---------- Justified text ---------- */
+#banner .content p,
+#main .inner p,
+.project-meta {
+	text-align: justify;
+	text-justify: inter-word;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+}
+
+/* ---------- Homepage banner: longer bio text ---------- */
+#banner.major { height: auto; min-height: 100vh; padding-top: 7em; padding-bottom: 5em; }
+#banner .content { display: block; }
+#banner .content .bio { max-width: 58em; }
+#banner .content .bio p { font-size: 1em; line-height: 1.75; margin: 0 0 1.25em 0; }
+#banner .content .bio p:last-child { margin-bottom: 0; }
+
+/* ---------- Project description ---------- */
+.project-meta { line-height: 1.9; margin-bottom: 2em; }
+.project-meta strong { letter-spacing: 0.05em; }
+
+/* ---------- Gallery: same-size photo cells, alternating left/right ---------- */
+/* Uses the template's own spotlight colors; the side opposite each photo stays empty. */
+.spotlights.gallery-spotlights > section { min-height: 30em; }
+.spotlights.gallery-spotlights > section > .image { cursor: zoom-in; border-bottom: none; }
+
+@media screen and (max-width: 980px) {
+	.spotlights.gallery-spotlights > section { min-height: 0; }
+	.spotlights.gallery-spotlights > section > .image { height: 22em; }
+	.spotlights.gallery-spotlights > section > .content { display: none; }
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+	position: fixed; inset: 0; z-index: 100000;
+	display: none; align-items: center; justify-content: center;
+	background: rgba(0, 0, 0, 0.92);
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 90vh; box-shadow: 0 0 40px rgba(0,0,0,0.6); }
+.lightbox button {
+	position: absolute; background: none; border: none; box-shadow: none;
+	color: #fff; font-size: 2.5rem; line-height: 1; width: auto; height: auto;
+	padding: 0.4em 0.6em; cursor: pointer; opacity: 0.75; text-transform: none;
+}
+.lightbox button:hover { opacity: 1; background: none; }
+.lightbox .lb-close { top: 0.2em; right: 0.3em; }
+.lightbox .lb-prev { left: 0.2em; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-next { right: 0.2em; top: 50%; transform: translateY(-50%); }
+
+/* ---------- Black / white / gray palette ---------- */
+/* Page surfaces */
+body, #wrapper { background-color: #232323 !important; }
+#main, #main.alt { background-color: #232323 !important; }
+#main > section { background-color: #262626 !important; }
+#banner { background-color: #262626 !important; }
+.tiles article { background-color: #2a2a2a !important; }
+
+/* Gallery rows: alternating neutral grays */
+#main .spotlights > section:nth-child(odd)  { background-color: #2a2a2a !important; }
+#main .spotlights > section:nth-child(even) { background-color: #323232 !important; }
+.spotlights > section > .content { background-color: transparent !important; }
+
+/* Template color overlays on banners, tiles and photos -> gray */
+#banner:before, #banner:after,
+.tiles article:before, .tiles article:after,
+.tiles article > .image:before, .tiles article > .image:after,
+.spotlights > section > .image:before, .spotlights > section > .image:after { filter: grayscale(1); }
+
+/* Parts that contain no photos -> fully gray (header, menu, contact, footer) */
+#header, #menu, #contact, #footer { filter: grayscale(1); }
