@@ -71,3 +71,12 @@ body, #wrapper { background-color: #232323 !important; }
 
 /* Parts that contain no photos -> fully gray (header, menu, contact, footer) */
 #header, #menu, #contact, #footer { filter: grayscale(1); }
+
+/* ---------- Gallery rows: force neutral gray (stronger overrides) ---------- */
+#gallery > section:nth-child(odd)  { background: #2a2a2a !important; }
+#gallery > section:nth-child(even) { background: #323232 !important; }
+#gallery > section > .content,
+#gallery > section > .content > .inner { background: transparent !important; }
+#gallery > section > .content { filter: grayscale(1); }
+#gallery > section > .content:before,
+#gallery > section > .content:after { display: none !important; }
